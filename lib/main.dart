@@ -1,4 +1,4 @@
-import 'clock_view.dart';
+import 'package:clock_application/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -21,15 +21,6 @@ class ClockApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('CLOCK APP'),
-      // ),
-      body: Container(
-        alignment: Alignment.center,
-        color: const Color(0xFF2D2F41),
-        child: const ClockView(),
-      ),
-    );
+    return HomePage();
   }
 }
