@@ -1,5 +1,7 @@
+import 'package:clock_application/menu_info.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'clock_view.dart';
 
 class HomePage extends StatelessWidget {
@@ -19,10 +21,10 @@ class HomePage extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              iconMenu('Clock', 'assets/clock_icon.png'),
-              iconMenu('Alarm', 'assets/alarm_icon.png'),
-              iconMenu('Timer', 'assets/timer_icon.png'),
-              iconMenu('StopWatch', 'assets/stopwatch_icon.png'),
+              iconMenu('Clock', 'assets/clock_icon.png', context),
+              iconMenu('Alarm', 'assets/alarm_icon.png', context),
+              iconMenu('Timer', 'assets/timer_icon.png', context),
+              iconMenu('StopWatch', 'assets/stopwatch_icon.png', context),
             ],
           ),
           const VerticalDivider(
@@ -128,30 +130,32 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Padding iconMenu(String title, String image) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 14),
-      child: TextButton(
-        onPressed: () {},
-        child: Column(
-          children: [
-            Image.asset(
-              image,
-              scale: 1.5,
+  TextButton iconMenu(String title, String image, BuildContext context) {
+    return TextButton(
+      //  padding = EdgeInsets.symmetric(horizontal: 0, vertical: 14),
+      onPressed: () {
+        var menuInfo = Provider.of<MenuInfo>(context);
+        menuInfo.updateMenuInfo(menuInfo);
+      },
+      child: Column(
+        children: [
+          Image.asset(
+            image,
+            scale: 1.5,
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          Text(
+            title,
+            style: const TextStyle(
+              fontFamily: 'avenir',
+              color: Colors.white,
             ),
-            const SizedBox(
-              height: 16,
-            ),
-            Text(
-              title,
-              style: const TextStyle(
-                fontFamily: 'avenir',
-                color: Colors.white,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
+    // );
   }
 }

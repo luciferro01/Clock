@@ -14,10 +14,16 @@ class ClockView extends StatefulWidget {
 class _ClockViewState extends State<ClockView> {
   @override
   void initState() {
-    Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {});
-    });
     super.initState();
+    if (mounted) {
+      Timer.periodic(const Duration(seconds: 1), (timer) {
+        setState(() {});
+      });
+    }
+
+    // if (!mounted) {
+    //   return;
+    // }
   }
 
   @override
