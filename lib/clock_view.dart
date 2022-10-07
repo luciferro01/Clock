@@ -15,12 +15,14 @@ class _ClockViewState extends State<ClockView> {
   @override
   void initState() {
     super.initState();
-    if (mounted) {
-      Timer.periodic(const Duration(seconds: 1), (timer) {
-        setState(() {});
-      });
+    // if (mounted) {
+    final periodicTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {});
+    });
+    // }
+    if (!mounted) {
+      periodicTimer.cancel();
     }
-
     // if (!mounted) {
     //   return;
     // }

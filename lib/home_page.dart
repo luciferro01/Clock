@@ -1,3 +1,5 @@
+import 'package:clock_application/alarm.dart';
+import 'package:clock_application/constants/constants.dart';
 import 'package:clock_application/data.dart';
 import 'package:clock_application/enums.dart';
 import 'package:clock_application/menu_info.dart';
@@ -38,100 +40,101 @@ class HomePage extends StatelessWidget {
             Expanded(
               child: Consumer<MenuInfo>(
                 builder: (context, value, child) {
-                  if (value.menuType != MenuType.clock) return Container();
-                  return Container(
-                    padding: const EdgeInsets.all(32),
-                    color: const Color(0xFF2D2F41),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // const SizedBox(height: 32),
-                        const Flexible(
-                          flex: 1,
-                          fit: FlexFit.loose,
-                          child: Text(
-                            'Clock',
-                            style: TextStyle(
-                                fontFamily: 'avenir',
-                                fontWeight: FontWeight.w700,
-                                color: Colors.white,
-                                fontSize: 20),
-                          ),
-                        ),
-                        const SizedBox(height: 32),
-                        Flexible(
-                          flex: 2,
-                          fit: FlexFit.loose,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                formattedTime,
-                                style: const TextStyle(
-                                  fontFamily: 'avenir',
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.white,
-                                  fontSize: 64,
-                                ),
-                              ),
-                              Text(
-                                formattedDate,
-                                style: const TextStyle(
-                                    fontFamily: 'avenir',
-                                    color: Colors.white,
-                                    fontSize: 20),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const Flexible(
-                          flex: 4,
-                          fit: FlexFit.loose,
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: ClockView(
-                              size: 200,
+                  if (value.menuType == MenuType.clock) {
+                    return Container(
+                      padding: const EdgeInsets.all(32),
+                      color: const Color(0xFF2D2F41),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // const SizedBox(height: 32),
+                          const Flexible(
+                            flex: 1,
+                            fit: FlexFit.loose,
+                            child: Text(
+                              'Clock',
+                              style: kheadingTextStyle,
                             ),
                           ),
-                        ),
-                        const SizedBox(height: 20),
-                        Flexible(
-                          flex: 2,
-                          fit: FlexFit.tight,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'TimeZone',
-                                style: TextStyle(
-                                  fontFamily: 'avenir',
-                                  fontWeight: FontWeight.w800,
-                                  fontSize: 20,
-                                ),
-                              ),
-                              const SizedBox(height: 20),
-                              Row(
-                                children: [
-                                  const Icon(
-                                    Icons.language,
+                          const SizedBox(height: 32),
+                          Flexible(
+                            flex: 2,
+                            fit: FlexFit.loose,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  formattedTime,
+                                  style: const TextStyle(
+                                    fontFamily: 'avenir',
+                                    fontWeight: FontWeight.w400,
                                     color: Colors.white,
+                                    fontSize: 64,
                                   ),
-                                  const SizedBox(width: 20),
-                                  Text(
-                                    'UTC $offSetSign$timeZoneString',
-                                    style: const TextStyle(
-                                      fontSize: 18,
+                                ),
+                                Text(
+                                  formattedDate,
+                                  style: const TextStyle(
                                       fontFamily: 'avenir',
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                      color: Colors.white,
+                                      fontSize: 20),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  );
+                          const Flexible(
+                            flex: 4,
+                            fit: FlexFit.loose,
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: ClockView(
+                                size: 200,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          Flexible(
+                            flex: 2,
+                            fit: FlexFit.tight,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'TimeZone',
+                                  style: TextStyle(
+                                    fontFamily: 'avenir',
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                const SizedBox(height: 20),
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.language,
+                                      color: Colors.white,
+                                    ),
+                                    const SizedBox(width: 20),
+                                    Text(
+                                      'UTC $offSetSign$timeZoneString',
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        fontFamily: 'avenir',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  } else if (value.menuType == MenuType.alarm) {
+                    return const Alarm();
+                  } else {
+                    return Container();
+                  }
                 },
               ),
             ),
